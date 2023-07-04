@@ -1,6 +1,7 @@
 .employeeTable {
   table-layout: fixed;
-  width: 100%;
+  width: 800px;
+  margin: auto;
   border-collapse: collapse;
   border-radius: 5%;
 }

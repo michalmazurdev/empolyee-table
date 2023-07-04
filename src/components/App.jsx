@@ -25,7 +25,7 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(page);
+    // console.log(page);
     // console.log(employeesToRender);
 
     setEmployeesToRender(choosePage(page, employees));
@@ -51,7 +51,7 @@ export const App = () => {
         <Header columns={columns} />
         <TableContent data={employeesToRender} />
       </EmployeeTable>
-      <Pagination employees={employees} onClick={changePage} />
+      <Pagination employees={employees} onClick={changePage} page={page} />
     </div>
   );
 };
