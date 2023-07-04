@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/empolyee-table/static/css/main.37dffaef.css",
+    "main.js": "/empolyee-table/static/js/main.77fb1b7f.js",
+    "index.html": "/empolyee-table/index.html",
+    "main.37dffaef.css.map": "/empolyee-table/static/css/main.37dffaef.css.map",
+    "main.77fb1b7f.js.map": "/empolyee-table/static/js/main.77fb1b7f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37dffaef.css",
+    "static/js/main.77fb1b7f.js"
+  ]
+}
