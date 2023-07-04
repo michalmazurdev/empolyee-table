@@ -11,3 +11,8 @@
   font-size: 0.8rem;
   font-weight: 500;
 }
+.sortButton {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}

@@ -23,6 +23,7 @@ export const App = () => {
   useEffect(() => {
     setEmployees(data);
   }, []);
+
   useEffect(() => {
     console.log(page);
     // console.log(employeesToRender);

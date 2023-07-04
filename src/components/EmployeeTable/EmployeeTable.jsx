@@ -2,6 +2,9 @@
 // import data from './słuzba.json';
 import React from 'react';
 import css from './EmployeeTable.module.css';
+import { ReactComponent as SortUp } from './sort-up.svg';
+import { ReactComponent as SortDown } from './sort-down.svg';
+
 // console.log(data);
 
 export const Header = ({ columns }) => {
@@ -11,13 +14,11 @@ export const Header = ({ columns }) => {
         {columns.map(column => (
           <th key={column} className={css.employeeTableHeaderCell}>
             {column}
-            <button>
-              {/* <img
-                height="14"
-                width="14"
-                src="/Users/michalmazur/Documents/coding/employee-table/src/components/EmployeeTable/sortUp.svg"
-                alt="sort up"
-              /> */}
+            <button className={css.sortButton}>
+              <SortUp />
+            </button>
+            <button className={css.sortButton}>
+              <SortDown />
             </button>
           </th>
         ))}
