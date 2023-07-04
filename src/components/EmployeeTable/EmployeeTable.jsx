@@ -11,6 +11,14 @@ export const Header = ({ columns }) => {
         {columns.map(column => (
           <th key={column} className={css.employeeTableHeaderCell}>
             {column}
+            <button>
+              <img
+                height="14"
+                width="14"
+                src="/Users/michalmazur/Documents/coding/employee-table/src/components/EmployeeTable/sortUp.svg"
+                alt="sort up"
+              />
+            </button>
           </th>
         ))}
       </tr>
