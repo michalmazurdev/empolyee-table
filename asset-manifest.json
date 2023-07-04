@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/empolyee-table/static/css/main.04fccacf.css",
-    "main.js": "/empolyee-table/static/js/main.09724c92.js",
+    "main.js": "/empolyee-table/static/js/main.35cbd097.js",
     "index.html": "/empolyee-table/index.html",
     "main.04fccacf.css.map": "/empolyee-table/static/css/main.04fccacf.css.map",
-    "main.09724c92.js.map": "/empolyee-table/static/js/main.09724c92.js.map"
+    "main.35cbd097.js.map": "/empolyee-table/static/js/main.35cbd097.js.map"
   },
   "entrypoints": [
     "static/css/main.04fccacf.css",
-    "static/js/main.09724c92.js"
+    "static/js/main.35cbd097.js"
   ]
 }
