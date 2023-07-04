@@ -12,12 +12,12 @@ export const Header = ({ columns }) => {
           <th key={column} className={css.employeeTableHeaderCell}>
             {column}
             <button>
-              {/* <img
+              <img
                 height="14"
                 width="14"
                 src="/Users/michalmazur/Documents/coding/employee-table/src/components/EmployeeTable/sortUp.svg"
                 alt="sort up"
-              /> */}
+              />
             </button>
           </th>
         ))}

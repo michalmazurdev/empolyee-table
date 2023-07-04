@@ -19,6 +19,10 @@ export const App = () => {
   const [employeesToRender, setEmployeesToRender] = useState(
     choosePage(page, employees)
   );
+
+  useEffect(() => {
+    setEmployees(data);
+  }, []);
   useEffect(() => {
     console.log(page);
     // console.log(employeesToRender);
