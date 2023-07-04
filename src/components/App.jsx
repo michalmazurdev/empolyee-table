@@ -8,13 +8,21 @@ import {
 import { Pagination } from './Pagination/Pagination';
 import data from './słuzba.json';
 
-const choosePage = (page, data) => {
-  const multiplier = page - 1;
-  return data.slice(0 + 5 * multiplier, 5 + 5 * multiplier);
-};
+const columns = [
+  'id',
+  'Imię',
+  'Nazwisko',
+  'Data urodzenia',
+  'Funkcja',
+  'Doświadczenie',
+];
 
 export const App = () => {
-  const [employees, setEmployees] = useState(data);
+  const choosePage = (page, data) => {
+    const multiplier = page - 1;
+    return data.slice(0 + 5 * multiplier, 5 + 5 * multiplier);
+  };
+  const [employees, setEmployees] = useState([...data]);
   const [page, setPage] = useState(1);
   const [employeesToRender, setEmployeesToRender] = useState(
     choosePage(page, employees)
@@ -22,27 +30,20 @@ export const App = () => {
 
   useEffect(() => {
     setEmployees(data);
+    // setEmployees(sortDescById(employees));
   }, []);
 
   useEffect(() => {
-    // console.log(page);
-    // console.log(employeesToRender);
-
     setEmployeesToRender(choosePage(page, employees));
   }, [page, employees, setEmployeesToRender]);
+
+  // const sortDescById = array => {
+  //   return array.sort((a, b) => b.id - a.id);
+  // };
 
   const changePage = event => {
     setPage(Number(event.target.innerText));
   };
-
-  const columns = [
-    'id',
-    'Imię',
-    'Nazwisko',
-    'Data urodzenia',
-    'Funkcja',
-    'Doświadczenie',
-  ];
 
   return (
     <div>

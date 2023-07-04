@@ -1,11 +1,7 @@
-// const { useState } = require('react');
-// import data from './słuzba.json';
 import React from 'react';
 import css from './EmployeeTable.module.css';
 import { ReactComponent as SortUp } from './sort-up.svg';
 import { ReactComponent as SortDown } from './sort-down.svg';
-
-// console.log(data);
 
 export const Header = ({ columns }) => {
   return (
@@ -46,8 +42,6 @@ export const TableContent = ({ data }) => {
   );
 };
 export const EmployeeTable = ({ children }) => {
-  // const [empoyees, setEmployees] = useState([]);
-
   return (
     <div>
       <table className={css.employeeTable}>{children}</table>
