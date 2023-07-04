@@ -1,0 +1,12 @@
+.employeeTable {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+.employeeTableHeaderCell {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 2px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
