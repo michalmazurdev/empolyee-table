@@ -37,14 +37,7 @@ export const App = () => {
     choosePage(page, employees)
   );
   const [currentSort, setCurrentSort] = useState('');
-  const [currentFilter, setC0urrentFilter] = useState({
-    id: null,
-    firstName: null,
-    lastName: null,
-    dateOfBirth: null,
-    function: null,
-    experience: null,
-  });
+  // const [currentFilter, setC0urrentFilter] = useState({});
 
   useEffect(() => {
     setEmployeesToRender(choosePage(page, employees));
@@ -119,13 +112,14 @@ export const App = () => {
     // if (event.target.value === '') {
     //   return;
     // }
-    setEmployees(
-      employees.filter(employee =>
-        employee[event.target.name]
-          .toLowerCase()
-          .includes(event.target.value.toLowerCase())
-      )
-    );
+
+    // setEmployees(
+    //   employees.filter(employee =>
+    //     employee[event.target.name]
+    //       .toLowerCase()
+    //       .includes(event.target.value.toLowerCase())
+    //   )
+    // );
   };
 
   const changePage = event => {
