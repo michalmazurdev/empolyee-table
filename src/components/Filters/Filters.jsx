@@ -1,18 +1,6 @@
 import css from './Filters.module.css';
 
-import 'flatpickr/dist/flatpickr.min.css';
-const years = [];
-for (let i = 1900; i < 2024; i++) {
-  years.push(i);
-}
-// console.log(years);
 export const Filters = ({ onChange }) => {
-  // flatpickr('#date', {
-  //   enableTime: false,
-  //   minuteIncrement: 1440,
-  //   onChange: onChange,
-  // });
-  // console.log(years);
   return (
     <div className={css.filtersContainer}>
       <div>
@@ -38,11 +26,7 @@ export const Filters = ({ onChange }) => {
             name="dateOfBirth"
             placeholder="Wpisz rok urodzenia"
           />
-          {years.forEach(year => (
-            <option value={year}>{year}</option>
-          ))}
         </label>
-
         <label>
           Funkcja
           <input onChange={onChange} type="text" name="function" />
