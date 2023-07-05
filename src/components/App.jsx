@@ -138,6 +138,7 @@ export const App = () => {
   const handleChange = event => {
     setCurrentFilterCategory(event.target.name);
     setCurrentFilterValue(event.target.value);
+    console.log(event.target.value);
     switch (event.target.name) {
       case 'firstName':
         setEmployees(
@@ -168,16 +169,15 @@ export const App = () => {
         break;
       case 'experience':
         setEmployees(
-          employees.filter(employee =>
-            employee['experience']
-              .toLowerCase()
-              .includes(event.target.value.toLowerCase())
+          dataWithDatesInMs.filter(
+            employee =>
+              Number(employee['experience']) === Number(event.target.value)
           )
         );
         break;
       case 'id':
         setEmployees(
-          employees.filter(
+          dataWithDatesInMs.filter(
             employee => Number(employee.id) === Number(event.target.value)
           )
         );
