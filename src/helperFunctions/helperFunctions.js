@@ -15,6 +15,7 @@ export const converMsToString = timestamp => {
   return new Date(timestamp).toLocaleString('pl').slice(0, -3).replace(',', '');
 };
 export const choosePage = (page, data) => {
+  console.log(data);
   const multiplier = page - 1;
   return data.slice(0 + 5 * multiplier, 5 + 5 * multiplier);
 };
