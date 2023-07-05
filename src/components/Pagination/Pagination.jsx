@@ -13,7 +13,7 @@ export const Pagination = ({ employees, onClick, page }) => {
   return (
     <div>
       <div className={css.paginationButtonsContainer}>{buttons}</div>
-      <p className={css.currentPageInfo}>Current page: {page}</p>
+      <p className={css.currentPageInfo}>Jesteś na stronie numer {page}</p>
     </div>
   );
 };

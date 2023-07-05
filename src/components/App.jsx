@@ -13,6 +13,13 @@ import {
   choosePage,
 } from '../helperFunctions/helperFunctions';
 import data from '../data/słuzba.json';
+const dataWithDatesInMs = data.map(employee => {
+  return {
+    ...employee,
+    id: Number(employee.id),
+    dateOfBirth: convertDateToMs(employee.dateOfBirth),
+  };
+});
 const columns = [
   'id',
   'Imię',
@@ -23,26 +30,48 @@ const columns = [
 ];
 
 export const App = () => {
-  const [employees, setEmployees] = useState(
-    data.map(employee => {
-      return {
-        ...employee,
-        id: Number(employee.id),
-        dateOfBirth: convertDateToMs(employee.dateOfBirth),
-      };
-    })
-  );
+  const [employees, setEmployees] = useState(dataWithDatesInMs);
   const [page, setPage] = useState(1);
   const [employeesToRender, setEmployeesToRender] = useState(
     choosePage(page, employees)
   );
   const [currentSort, setCurrentSort] = useState('');
-  // const [currentFilter, setC0urrentFilter] = useState({});
+  const [currentFilterCategory, setCurrentFilterCategory] = useState(null);
+  const [currentFilterValue, setCurrentFilterValue] = useState(null);
+
+  // const filterEmployees = () => {
+  //   if (currentFilterCategory === null) {
+  //     return;
+  //   } else {
+  //     if (
+  //       currentFilterCategory === 'firstName' ||
+  //       currentFilterCategory === 'lastName' ||
+  //       currentFilterCategory === 'function' ||
+  //       currentFilterCategory === 'experience'
+  //     ) {
+  //       console.log('cos');
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
-    setEmployeesToRender(choosePage(page, employees));
     setPage(page);
-  }, [page, employees, setEmployeesToRender, currentSort]);
+    if (currentFilterValue === null) {
+      setEmployees(dataWithDatesInMs);
+    }
+    setEmployeesToRender(choosePage(page, employees));
+
+    // console.log(currentFilterCategory, currentFilterValue);
+  }, [
+    page,
+    employees,
+    setEmployeesToRender,
+    currentSort,
+    currentFilterCategory,
+    currentFilterValue,
+    setEmployees,
+    setCurrentFilterValue,
+  ]);
 
   const sortDescending = column => {
     setCurrentSort(`${column}descending`);
@@ -107,19 +136,75 @@ export const App = () => {
     }
   };
   const handleChange = event => {
-    console.log(event.target.value);
-    console.log(event.target.name);
-    // if (event.target.value === '') {
-    //   return;
-    // }
+    setCurrentFilterCategory(event.target.name);
+    setCurrentFilterValue(event.target.value);
+    switch (event.target.name) {
+      case 'firstName':
+        setEmployees(
+          employees.filter(employee =>
+            employee['firstName']
+              .toLowerCase()
+              .includes(event.target.value.toLowerCase())
+          )
+        );
+        break;
+      case 'lastName':
+        setEmployees(
+          employees.filter(employee =>
+            employee['lastName']
+              .toLowerCase()
+              .includes(event.target.value.toLowerCase())
+          )
+        );
+        break;
+      case 'function':
+        setEmployees(
+          employees.filter(employee =>
+            employee['function']
+              .toLowerCase()
+              .includes(event.target.value.toLowerCase())
+          )
+        );
+        break;
+      case 'experience':
+        setEmployees(
+          employees.filter(employee =>
+            employee['experience']
+              .toLowerCase()
+              .includes(event.target.value.toLowerCase())
+          )
+        );
+        break;
+      case 'id':
+        setEmployees(
+          employees.filter(
+            employee => Number(employee.id) === Number(event.target.value)
+          )
+        );
+        break;
 
-    // setEmployees(
-    //   employees.filter(employee =>
-    //     employee[event.target.name]
-    //       .toLowerCase()
-    //       .includes(event.target.value.toLowerCase())
-    //   )
-    // );
+      default:
+        console.log('error');
+    }
+
+    // if (
+    //   currentFilterCategory === 'firstName' ||
+    //   currentFilterCategory === 'lastName' ||
+    //   currentFilterCategory === 'function' ||
+    //   currentFilterCategory === 'experience'
+    // ) {
+    //   setEmployees(
+    //     employees.filter(employee =>
+    //       employee[currentFilterCategory]
+    //         .toLowerCase()
+    //         .includes(currentFilterValue.toLowerCase())
+    //     )
+    //   );
+    // }
+    if (event.target.value === '') {
+      setCurrentFilterCategory(null);
+      setCurrentFilterValue(null);
+    }
   };
 
   const changePage = event => {
