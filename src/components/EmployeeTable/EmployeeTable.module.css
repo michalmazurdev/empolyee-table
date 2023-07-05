@@ -17,3 +17,16 @@
   background-color: transparent;
   padding: 0;
 }
+td {
+  border-collapse: collapse;
+  border: 1px solid grey;
+}
+tr {
+  background-color: white;
+}
+tr:nth-of-type(2n) {
+  background-color: lightgrey;
+}
+tbody tr:hover {
+  background-color: grey;
+}
