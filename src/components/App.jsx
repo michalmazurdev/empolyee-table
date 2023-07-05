@@ -189,7 +189,7 @@ export const App = () => {
   return (
     <div>
       <h1 className={css.heading}>Pracownicy posiadłości Pięknej i Bestii</h1>
-      <p>opcje filtrowania</p>
+
       <Filters onChange={handleChange} />
 
       <EmployeeTable>
