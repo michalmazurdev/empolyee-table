@@ -3,23 +3,17 @@ import css from './EmployeeTable.module.css';
 import { ReactComponent as SortUp } from './sort-up.svg';
 import { ReactComponent as SortDown } from './sort-down.svg';
 
-export const Header = ({ columns, sortUp, sortDown }) => {
+export const Header = ({ columns, accesors, sortUp, sortDown }) => {
   return (
     <thead>
       <tr>
-        {columns.map(column => (
+        {columns.map((column, index) => (
           <th key={column} className={css.employeeTableHeaderCell}>
             {column}
-            <button
-              className={css.sortButton}
-              onClick={() => sortUp(`${column}ascending`)}
-            >
+            <button className={css.sortButton} onClick={() => sortUp(column)}>
               <SortUp />
             </button>
-            <button
-              className={css.sortButton}
-              onClick={() => sortDown(`${column}descending`)}
-            >
+            <button className={css.sortButton} onClick={() => sortDown(column)}>
               <SortDown />
             </button>
           </th>

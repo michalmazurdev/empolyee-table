@@ -18,9 +18,6 @@ const columns = [
   'Funkcja',
   'Doświadczenie',
 ];
-const accesors = Object.keys(data[0]);
-console.log(data[0]);
-console.log(accesors);
 
 const choosePage = (page, data) => {
   const multiplier = page - 1;
@@ -37,7 +34,7 @@ export const App = () => {
 
   // useEffect(() => {
   //   // setEmployees(data);
-  //   setEmployees(sortDescById(employees));
+  //   setEmployees(sortDescending(employees));
   // }, []);
 
   useEffect(() => {
@@ -45,13 +42,61 @@ export const App = () => {
     setPage(page);
   }, [page, employees, setEmployeesToRender, currentSort]);
 
-  const sortDescById = column => {
-    setCurrentSort(column);
-    setEmployees(employees.sort((a, b) => b.id - a.id));
+  const sortDescending = column => {
+    setCurrentSort(`${column}descending`);
+    switch (column) {
+      case 'id':
+        setEmployees(employees.sort((a, b) => b.id - a.id));
+        break;
+      case 'Imię':
+        setEmployees(
+          employees.sort((a, b) => b.firstName.localeCompare(a.firstName))
+        );
+        break;
+      case 'Nazwisko':
+        setEmployees(
+          employees.sort((a, b) => b.lastName.localeCompare(a.lastName))
+        );
+        break;
+      case 'Funkcja':
+        setEmployees(
+          employees.sort((a, b) => b.function.localeCompare(a.function))
+        );
+        break;
+      case 'Doświadczenie':
+        setEmployees(employees.sort((a, b) => b.experience - a.experience));
+        break;
+      default:
+        console.log('error');
+    }
   };
-  const sortAscById = column => {
-    setCurrentSort(column);
-    setEmployees(employees.sort((a, b) => a.id - b.id));
+  const sortAscending = column => {
+    setCurrentSort(`${column}ascending`);
+    switch (column) {
+      case 'id':
+        setEmployees(employees.sort((a, b) => a.id - b.id));
+        break;
+      case 'Imię':
+        setEmployees(
+          employees.sort((a, b) => a.firstName.localeCompare(b.firstName))
+        );
+        break;
+      case 'Nazwisko':
+        setEmployees(
+          employees.sort((a, b) => a.lastName.localeCompare(b.lastName))
+        );
+        break;
+      case 'Funkcja':
+        setEmployees(
+          employees.sort((a, b) => a.function.localeCompare(b.function))
+        );
+        break;
+      case 'Doświadczenie':
+        setEmployees(employees.sort((a, b) => a.experience - b.experience));
+        break;
+      default:
+        console.log('error');
+    }
   };
   const changePage = event => {
     setPage(Number(event.target.innerText));
@@ -63,8 +108,8 @@ export const App = () => {
       <EmployeeTable>
         <Header
           columns={columns}
-          sortUp={sortAscById}
-          sortDown={sortDescById}
+          sortUp={sortAscending}
+          sortDown={sortDescending}
         />
 
         <TableContent data={employeesToRender} />
