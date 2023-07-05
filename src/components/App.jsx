@@ -39,29 +39,12 @@ export const App = () => {
   const [currentFilterCategory, setCurrentFilterCategory] = useState(null);
   const [currentFilterValue, setCurrentFilterValue] = useState(null);
 
-  // const filterEmployees = () => {
-  //   if (currentFilterCategory === null) {
-  //     return;
-  //   } else {
-  //     if (
-  //       currentFilterCategory === 'firstName' ||
-  //       currentFilterCategory === 'lastName' ||
-  //       currentFilterCategory === 'function' ||
-  //       currentFilterCategory === 'experience'
-  //     ) {
-  //       console.log('cos');
-  //     }
-  //   }
-  // };
-
   useEffect(() => {
     setPage(page);
     if (currentFilterValue === null) {
       setEmployees(dataWithDatesInMs);
     }
     setEmployeesToRender(choosePage(page, employees));
-
-    // console.log(currentFilterCategory, currentFilterValue);
   }, [
     page,
     employees,
@@ -138,7 +121,6 @@ export const App = () => {
   const handleChange = event => {
     setCurrentFilterCategory(event.target.name);
     setCurrentFilterValue(event.target.value);
-    console.log(event.target.value);
     switch (event.target.name) {
       case 'firstName':
         setEmployees(
@@ -182,25 +164,18 @@ export const App = () => {
           )
         );
         break;
-
+      case 'dateOfBirth':
+        setEmployees(
+          dataWithDatesInMs.filter(
+            employee =>
+              Number(new Date(employee.dateOfBirth).getFullYear()) ===
+              Number(event.target.value)
+          )
+        );
+        break;
       default:
         console.log('error');
     }
-
-    // if (
-    //   currentFilterCategory === 'firstName' ||
-    //   currentFilterCategory === 'lastName' ||
-    //   currentFilterCategory === 'function' ||
-    //   currentFilterCategory === 'experience'
-    // ) {
-    //   setEmployees(
-    //     employees.filter(employee =>
-    //       employee[currentFilterCategory]
-    //         .toLowerCase()
-    //         .includes(currentFilterValue.toLowerCase())
-    //     )
-    //   );
-    // }
     if (event.target.value === '') {
       setCurrentFilterCategory(null);
       setCurrentFilterValue(null);
@@ -214,7 +189,9 @@ export const App = () => {
   return (
     <div>
       <h1 className={css.heading}>Pracownicy posiadłości Pięknej i Bestii</h1>
+      <p>opcje filtrowania</p>
       <Filters onChange={handleChange} />
+
       <EmployeeTable>
         <Header
           columns={columns}
