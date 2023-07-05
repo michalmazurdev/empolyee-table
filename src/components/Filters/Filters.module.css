@@ -1,0 +1,12 @@
+.filtersContainer {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+label {
+  display: flex;
+  justify-content: right;
+  gap: 3px;
+}

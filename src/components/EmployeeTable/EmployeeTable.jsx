@@ -2,7 +2,6 @@ import React from 'react';
 import css from './EmployeeTable.module.css';
 import { ReactComponent as SortUp } from '../../images/sort-up.svg';
 import { ReactComponent as SortDown } from '../../images/sort-down.svg';
-
 import { converMsToString } from '../../helperFunctions/helperFunctions';
 export const Header = ({ columns, accesors, sortUp, sortDown }) => {
   return (
