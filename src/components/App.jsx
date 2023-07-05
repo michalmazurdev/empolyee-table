@@ -7,8 +7,7 @@ import {
 } from './EmployeeTable/EmployeeTable';
 import { Pagination } from './Pagination/Pagination';
 import data from './słuzba.json';
-// import { ReactComponent as SortUp } from './EmployeeTable/sort-up.svg';
-// import { ReactComponent as SortDown } from './EmployeeTable/sort-down.svg';
+import getTime from 'date-fns/getTime';
 
 const columns = [
   'id',
@@ -18,6 +17,20 @@ const columns = [
   'Funkcja',
   'Doświadczenie',
 ];
+const convertDateToMs = date => {
+  const dotsReplaced = date.replaceAll('.', ' ');
+  const semicolonReplaced = dotsReplaced.replace(':', ' ');
+  const array = semicolonReplaced.split(' ');
+  const year = Number(array[2]);
+  const month = Number(array[1]) - 1;
+  const day = Number(array[0]);
+  const hour = Number(array[3]);
+  const minutes = Number(array[4]);
+  return getTime(new Date(year, month, day, hour, minutes));
+};
+export const converMsToString = timestamp => {
+  return new Date(timestamp).toLocaleString('pl').slice(0, -3).replace(',', '');
+};
 
 const choosePage = (page, data) => {
   const multiplier = page - 1;
@@ -25,17 +38,25 @@ const choosePage = (page, data) => {
 };
 
 export const App = () => {
-  const [employees, setEmployees] = useState([...data]);
+  const [employees, setEmployees] = useState(
+    data.map(employee => {
+      return {
+        ...employee,
+        dateOfBirth: convertDateToMs(employee.dateOfBirth),
+      };
+    })
+  );
   const [page, setPage] = useState(1);
   const [employeesToRender, setEmployeesToRender] = useState(
     choosePage(page, employees)
   );
   const [currentSort, setCurrentSort] = useState('');
 
-  // useEffect(() => {
-  //   // setEmployees(data);
-  //   setEmployees(sortDescending(employees));
-  // }, []);
+  useEffect(() => {
+    // setEmployees(data);
+    // setEmployees(sortDescending(employees));
+    // console.log(employees);
+  }, []);
 
   useEffect(() => {
     setEmployeesToRender(choosePage(page, employees));
@@ -57,6 +78,9 @@ export const App = () => {
         setEmployees(
           employees.sort((a, b) => b.lastName.localeCompare(a.lastName))
         );
+        break;
+      case 'Data urodzenia':
+        setEmployees(employees.sort((a, b) => b.dateOfBirth - a.dateOfBirth));
         break;
       case 'Funkcja':
         setEmployees(
@@ -85,6 +109,9 @@ export const App = () => {
         setEmployees(
           employees.sort((a, b) => a.lastName.localeCompare(b.lastName))
         );
+        break;
+      case 'Data urodzenia':
+        setEmployees(employees.sort((a, b) => a.dateOfBirth - b.dateOfBirth));
         break;
       case 'Funkcja':
         setEmployees(

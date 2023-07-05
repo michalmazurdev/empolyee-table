@@ -3,6 +3,7 @@ import css from './EmployeeTable.module.css';
 import { ReactComponent as SortUp } from './sort-up.svg';
 import { ReactComponent as SortDown } from './sort-down.svg';
 
+import { converMsToString } from '../App.jsx';
 export const Header = ({ columns, accesors, sortUp, sortDown }) => {
   return (
     <thead>
@@ -32,7 +33,7 @@ export const TableContent = ({ data }) => {
             <td>{person.id}</td>
             <td>{person.firstName}</td>
             <td>{person.lastName}</td>
-            <td>{person.dateOfBirth}</td>
+            <td>{converMsToString(person.dateOfBirth)}</td>
             <td>{person.function}</td>
             <td>{person.experience}</td>
           </tr>
