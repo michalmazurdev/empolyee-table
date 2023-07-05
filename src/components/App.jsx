@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import css from './App.module.css';
 import {
@@ -6,9 +7,11 @@ import {
   TableContent,
 } from './EmployeeTable/EmployeeTable';
 import { Pagination } from './Pagination/Pagination';
-import data from './słuzba.json';
-import getTime from 'date-fns/getTime';
-
+import {
+  convertDateToMs,
+  choosePage,
+} from '../helperFunctions/helperFunctions';
+import data from '../data/słuzba.json';
 const columns = [
   'id',
   'Imię',
@@ -17,25 +20,6 @@ const columns = [
   'Funkcja',
   'Doświadczenie',
 ];
-const convertDateToMs = date => {
-  const dotsReplaced = date.replaceAll('.', ' ');
-  const semicolonReplaced = dotsReplaced.replace(':', ' ');
-  const array = semicolonReplaced.split(' ');
-  const year = Number(array[2]);
-  const month = Number(array[1]) - 1;
-  const day = Number(array[0]);
-  const hour = Number(array[3]);
-  const minutes = Number(array[4]);
-  return getTime(new Date(year, month, day, hour, minutes));
-};
-export const converMsToString = timestamp => {
-  return new Date(timestamp).toLocaleString('pl').slice(0, -3).replace(',', '');
-};
-
-const choosePage = (page, data) => {
-  const multiplier = page - 1;
-  return data.slice(0 + 5 * multiplier, 5 + 5 * multiplier);
-};
 
 export const App = () => {
   const [employees, setEmployees] = useState(
@@ -51,12 +35,6 @@ export const App = () => {
     choosePage(page, employees)
   );
   const [currentSort, setCurrentSort] = useState('');
-
-  useEffect(() => {
-    // setEmployees(data);
-    // setEmployees(sortDescending(employees));
-    // console.log(employees);
-  }, []);
 
   useEffect(() => {
     setEmployeesToRender(choosePage(page, employees));
