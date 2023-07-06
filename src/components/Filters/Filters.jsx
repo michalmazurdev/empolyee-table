@@ -1,6 +1,7 @@
 import css from './Filters.module.css';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import { useEffect } from 'react';
 
 export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
   const options = {
@@ -8,7 +9,7 @@ export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
     time_24hr: true,
     dateFormat: 'd.m.Y',
     mode: 'range',
-    // altInput: true,
+    altInput: true,
 
     onClose(selectedDates) {
       if (selectedDates.length === 0) {
@@ -17,7 +18,10 @@ export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
       handleFilteringByDOB(selectedDates);
     },
   };
-  flatpickr('#date', options);
+
+  useEffect(() => {
+    flatpickr('#date', options);
+  });
   return (
     <div>
       <div className={css.filtersContainer}>
@@ -54,7 +58,7 @@ export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
           <label>
             Data urodzenia
             <input
-              // type="text"
+              type="text"
               name="dateOfBirth"
               placeholder="Wybierz zakres dat"
               id="date"
