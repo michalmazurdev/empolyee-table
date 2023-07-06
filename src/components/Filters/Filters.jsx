@@ -1,44 +1,108 @@
 import css from './Filters.module.css';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 
-export const Filters = ({ onChange }) => {
+export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
+  const options = {
+    enableTime: true,
+    time_24hr: true,
+    // minuteIncrement: 1,
+    dateFormat: 'd.m.Y',
+    mode: 'range',
+
+    onClose(selectedDates) {
+      console.log('cos0');
+      handleFilteringByDOB(selectedDates);
+    },
+  };
+  flatpickr('#date', options);
   return (
     <div>
-      <p>opcje filtrowania</p>
       <div className={css.filtersContainer}>
         <div>
           <label>
             id
-            <input onChange={onChange} type="number" name="id" />
+            <input
+              onChange={handleFiltering}
+              className={css.input}
+              type="number"
+              name="id"
+            />
           </label>
           <label>
             Imię
-            <input onChange={onChange} type="text" name="firstName" />
+            <input
+              onChange={handleFiltering}
+              className={css.input}
+              type="text"
+              name="firstName"
+            />
           </label>
           <label>
             Nazwisko
-            <input onChange={onChange} type="text" name="lastName" />
+            <input
+              onChange={handleFiltering}
+              className={css.input}
+              type="text"
+              name="lastName"
+              autoComplete="new-password"
+              autofill="off"
+            />
           </label>
         </div>
         <div>
-          <label htmlFor="date">
+          <label>
             Data urodzenia
             <input
-              onChange={onChange}
-              type="text"
+              // type="text"
               name="dateOfBirth"
-              placeholder="Wpisz rok urodzenia"
+              placeholder="Wybierz zakres dat"
+              id="date"
+              className={css.input}
             />
           </label>
           <label>
             Funkcja
-            <input onChange={onChange} type="text" name="function" />
+            <input
+              onChange={handleFiltering}
+              className={css.input}
+              type="text"
+              name="function"
+            />
           </label>
           <label>
             Doświadczenie
-            <input onChange={onChange} type="number" name="experience" />
+            <input
+              onChange={handleFiltering}
+              className={css.input}
+              type="number"
+              name="experience"
+            />
           </label>
         </div>
       </div>
     </div>
+  );
+};
+export const ClearButton = ({ onClick }) => {
+  return (
+    <button className={css.button} onClick={onClick}>
+      Wyczyść filtry
+    </button>
+  );
+};
+
+export const ShowFilters = ({ onClick }) => {
+  return (
+    <button className={css.button} onClick={onClick}>
+      Pokaż filtry
+    </button>
+  );
+};
+export const HideFilters = ({ onClick }) => {
+  return (
+    <button className={css.button} onClick={onClick}>
+      Schowaj filtry
+    </button>
   );
 };

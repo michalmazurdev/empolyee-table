@@ -3,7 +3,7 @@
   justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 label {
   display: flex;
@@ -11,7 +11,16 @@ label {
   gap: 3px;
   font-size: 0.8rem;
 }
-input {
+.input {
   font-size: 0.8rem;
   height: 0.8rem;
+}
+.button {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  padding: 1px;
+  border: 1px soild grey;
 }

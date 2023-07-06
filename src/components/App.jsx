@@ -7,12 +7,19 @@ import {
   TableContent,
 } from './EmployeeTable/EmployeeTable';
 import { Pagination } from './Pagination/Pagination';
-import { Filters } from './Filters/Filters';
+import {
+  Filters,
+  ClearButton,
+  ShowFilters,
+  HideFilters,
+} from './Filters/Filters';
 import {
   convertDateToMs,
   choosePage,
 } from '../helperFunctions/helperFunctions';
 import data from '../data/słuzba.json';
+import getTime from 'date-fns/getTime';
+
 const dataWithDatesInMs = data.map(employee => {
   return {
     ...employee,
@@ -38,7 +45,7 @@ export const App = () => {
   const [currentSort, setCurrentSort] = useState('');
   const [currentFilterCategory, setCurrentFilterCategory] = useState(null);
   const [currentFilterValue, setCurrentFilterValue] = useState(null);
-
+  const [shouldFiltersBeShown, setShouldFiltersBeShown] = useState(false);
   useEffect(() => {
     setPage(page);
     if (currentFilterValue === null) {
@@ -118,9 +125,10 @@ export const App = () => {
         console.log('error');
     }
   };
-  const handleChange = event => {
+  const handleFiltering = event => {
     setCurrentFilterCategory(event.target.name);
     setCurrentFilterValue(event.target.value);
+    setPage(1);
     switch (event.target.name) {
       case 'firstName':
         setEmployees(
@@ -164,15 +172,6 @@ export const App = () => {
           )
         );
         break;
-      case 'dateOfBirth':
-        setEmployees(
-          dataWithDatesInMs.filter(
-            employee =>
-              Number(new Date(employee.dateOfBirth).getFullYear()) ===
-              Number(event.target.value)
-          )
-        );
-        break;
       default:
         console.log('error');
     }
@@ -182,6 +181,30 @@ export const App = () => {
     }
   };
 
+  const handleFilteringByDOB = selectedDates => {
+    setPage(1);
+    setCurrentFilterCategory('dateOfBirth');
+    setCurrentFilterValue(selectedDates);
+    const startDate = getTime(selectedDates[0]);
+    const endDate = getTime(selectedDates[1]);
+    setEmployees(
+      dataWithDatesInMs.filter(employee => {
+        return (
+          employee.dateOfBirth > startDate && employee.dateOfBirth < endDate
+        );
+      })
+    );
+  };
+  const toggleFilters = () => {
+    setShouldFiltersBeShown(!shouldFiltersBeShown);
+  };
+  const clearFilters = () => {
+    setCurrentFilterCategory(null);
+    setCurrentFilterValue(null);
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => (input.value = ''));
+  };
+
   const changePage = event => {
     setPage(Number(event.target.innerText));
   };
@@ -189,9 +212,18 @@ export const App = () => {
   return (
     <div>
       <h1 className={css.heading}>Pracownicy posiadłości Pięknej i Bestii</h1>
-
-      <Filters onChange={handleChange} />
-
+      {shouldFiltersBeShown ? (
+        <HideFilters onClick={toggleFilters} />
+      ) : (
+        <ShowFilters onClick={toggleFilters} />
+      )}
+      {shouldFiltersBeShown && (
+        <Filters
+          handleFiltering={handleFiltering}
+          handleFilteringByDOB={handleFilteringByDOB}
+        />
+      )}
+      {currentFilterValue !== null && <ClearButton onClick={clearFilters} />}{' '}
       <EmployeeTable>
         <Header
           columns={columns}
