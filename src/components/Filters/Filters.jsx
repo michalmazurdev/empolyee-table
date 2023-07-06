@@ -6,12 +6,14 @@ export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
   const options = {
     enableTime: true,
     time_24hr: true,
-    // minuteIncrement: 1,
     dateFormat: 'd.m.Y',
     mode: 'range',
+    altInput: true,
 
     onClose(selectedDates) {
-      console.log('cos0');
+      if (selectedDates.length === 0) {
+        return;
+      }
       handleFilteringByDOB(selectedDates);
     },
   };
@@ -45,8 +47,6 @@ export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
               className={css.input}
               type="text"
               name="lastName"
-              autoComplete="new-password"
-              autofill="off"
             />
           </label>
         </div>
@@ -59,6 +59,7 @@ export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
               placeholder="Wybierz zakres dat"
               id="date"
               className={css.input}
+              autoComplete="off"
             />
           </label>
           <label>
