@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/empolyee-table/static/css/main.b5b3dde6.css",
-    "main.js": "/empolyee-table/static/js/main.2619df96.js",
+    "main.js": "/empolyee-table/static/js/main.df3839f8.js",
     "index.html": "/empolyee-table/index.html",
     "static/media/sort-up.svg": "/empolyee-table/static/media/sort-up.cf64f550a20aeab522081863f76f103f.svg",
     "static/media/sort-down.svg": "/empolyee-table/static/media/sort-down.8d749a53908ea0422fe109b98cc778c7.svg",
     "main.b5b3dde6.css.map": "/empolyee-table/static/css/main.b5b3dde6.css.map",
-    "main.2619df96.js.map": "/empolyee-table/static/js/main.2619df96.js.map"
+    "main.df3839f8.js.map": "/empolyee-table/static/js/main.df3839f8.js.map"
   },
   "entrypoints": [
     "static/css/main.b5b3dde6.css",
-    "static/js/main.2619df96.js"
+    "static/js/main.df3839f8.js"
   ]
 }
