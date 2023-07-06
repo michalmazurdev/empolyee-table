@@ -8,7 +8,7 @@ export const Filters = ({ handleFiltering, handleFilteringByDOB }) => {
     time_24hr: true,
     dateFormat: 'd.m.Y',
     mode: 'range',
-    altInput: true,
+    // altInput: true,
 
     onClose(selectedDates) {
       if (selectedDates.length === 0) {
